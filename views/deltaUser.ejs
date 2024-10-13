@@ -1,0 +1,13 @@
+<h1><%= data.title %></h1>
+<div class="user-details">
+  <h2>Thông tin người dùng</h2>
+  <p><strong>ID:</strong> <%= data.user.id %></p>
+  <p><strong>Username:</strong> <%= data.user.username %></p>
+  <p><strong>Password:</strong> <%= data.user.password %></p>
+  <p><strong>Full name:</strong> <%= data.user.fullname %></p>
+  <p><strong>Address:</strong> <%= data.user.address %></p>
+  <p><strong>Sex:</strong> <%= data.user.sex %></p>
+  <p><strong>Email:</strong> <%= data.user.email %></p>
+
+  <a href="/edituser/<%= data.user.id %>" class="icon">✏️ Sửa thông tin</a>
+</div>

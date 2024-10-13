@@ -1,0 +1,89 @@
+<style>
+    /* Styling the table */
+    table {
+      width: 100%;
+      border-collapse: collapse; /* Merge the borders between cells */
+      margin-top: 20px;
+    }
+  
+    /* Table header styling */
+    th {
+      background-color: #f2f2f2;
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd; /* Border for table header */
+    }
+  
+    /* Table data styling */
+    td {
+      padding: 10px;
+      border: 1px solid #ddd; /* Border for table cells */
+    }
+  
+    /* Row hover effect */
+    tr:hover {
+      background-color: #f9f9f9; /* Highlight the row on hover */
+    }
+  
+    /* Button and link styling */
+    .icon {
+      margin-right: 5px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #333; /* Change icon color */
+      cursor: pointer;
+    }
+  
+    /* Form button styling */
+    form .icon {
+      background: none;
+      border: none;
+      padding: 0;
+      color: red;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  
+    /* Center the "No users found" message */
+    td[colspan="5"] {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+<h1><%= data.title %></h1>
+<table>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Username</th>
+        <th>Full name</th>
+        <th>Address</th>
+        <th>Setting</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data.rows && data.rows.length > 0) { %> <!-- Kiểm tra xem rows có dữ liệu không -->
+        <% data.rows.forEach((user, index) => { %> <!-- Lặp qua danh sách người dùng -->
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= user.username %></td>
+            <td><%= user.fullname %></td>
+            <td><%= user.address %></td>
+            <td>
+              <a href="/deltauser/<%= user.id %>" class="icon">👁️</a>
+              <a href="/edituser/<%= user.id %>" class="icon">✏️</a>
+              <!-- Form xóa người dùng -->
+              <form action="/deleteuser" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                <!-- Trường hidden chứa id người dùng -->
+                <input type="hidden" name="id" value="<%= user.id %>" />
+                <button type="submit" class="icon">🗑️</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %> <!-- Kết thúc vòng lặp -->
+      <% } else { %> 
+        <tr><td colspan="5">No users found.</td></tr>
+      <% } %> <!-- Nếu không có dữ liệu -->
+    </tbody>
+</table>
