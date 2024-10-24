@@ -11,6 +11,7 @@ import { editUser } from '../controller/UserController';
 import { updateUser } from '../controller/UserController'; 
 import { createUser } from '../controller/UserController'; 
 import { insertUser } from '../controller/UserController'; 
+import {loginUser} from '../controller/UserController';
 const router = express.Router()
 const initWebRoute = (app) => {
     router.get('/', getHomePage)
@@ -22,7 +23,7 @@ const initWebRoute = (app) => {
     router.get('/edituser/:id', editUser); 
     router.post('/edituser/', updateUser) 
     router.get('/createnewuser/', createUser);
-    router.post('/createnewuser/', insertUser) 
+    router.post('/login/', loginUser);
     router.get('/date', (req, res) => {
         res.status(200).set({ 'Content-Type': 'text/html; charset=utf-8' });
         res.send(`${date()}`);

@@ -31,4 +31,18 @@ const isEmailExist = async (email) => {
   const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
   return rows.length > 0 ? true : false;  
 };
-export default { getAllUser, getUserById, deleteUserbyID, updateUser, insertUser, isUserExist, isEmailExist}
+// Kiểm tra thông tin đăng nhập
+const loginUser = async (username) => {
+  // Truy vấn thông tin người dùng theo tên đăng nhập
+  const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
+  
+  // Nếu tìm thấy người dùng thì trả về thông tin người dùng, ngược lại trả về null
+  if (rows.length > 0) {
+    return rows[0]; // Trả về đối tượng người dùng đầu tiên (chỉ có một kết quả do username là duy nhất)
+  } else {
+    return null;
+  }
+};
+
+export default { getAllUser, getUserById, deleteUserbyID, updateUser, insertUser, isUserExist, isEmailExist, loginUser };
+

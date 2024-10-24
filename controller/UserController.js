@@ -53,7 +53,7 @@ const createUser = (req, res) => {
   res.render('home', {
     data: {
       title: 'Create New User',
-      page: 'createNewUser'
+      page: 'createNewUser'     
     }
   });
 }
@@ -66,6 +66,26 @@ const insertUser = async (req, res) => {
     res.redirect("/createNewUser"); 
   }
 };
+const loginUser = (req, res) => {
+  res.render('home', {
+    data: {
+      title: 'Create New User',
+      page: 'loginUser'     
+    }
+  });
+}
+const login = (req, res) => {
+  const { email, password } = req.body;
+
+  // Kiểm tra dữ liệu (tạm thời sử dụng một email và password cố định để kiểm tra)
+  if (email === 'admin@example.com' && password === 'password') {
+      res.send('Login thành công!');
+  } else {
+      res.status(401).send('Email hoặc mật khẩu không đúng.');
+  }
+};
+
+
 
 // Xuất các hàm controller để sử dụng trong routing
-export { getAllUser, createUser, viewUser, deleteUser, editUser, updateUser, insertUser};
+export { getAllUser, createUser, viewUser, deleteUser, editUser, updateUser, insertUser,login,loginUser};
