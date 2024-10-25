@@ -1,5 +1,9 @@
 import express from "express"
-const getContactPage = (req, res) => {
-    return res.render("home", { data: { title: 'Contact page', page:"contact", content: 'Đây là trang contact' } })
+const getContact = (req, res) => {
+    return res.render("home", { data: { title: 'Page Contact',
+        page:'contact', 
+        name: 'Huỳnh Duy Đặng', 
+        email: 'hddang2100514@gmail.com',
+        phonenumber: '1234567890' } })
 }
-export default getContactPage
+export default getContact

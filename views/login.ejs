@@ -1,0 +1,19 @@
+<div class="card" style="width: 24rem;">
+    <div class="card-body">
+        <h2 class="card-title text-center">Đăng Nhập</h2>
+        <form id="loginForm" action="/login" method="POST"> <!-- Xóa form="" vì không cần thiết -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Tài Khoản:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật Khẩu:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
+        </form>
+        <% if (data.error) { %> <!-- Kiểm tra nếu có lỗi -->
+            <p id="errorMessage" class="text-danger text-center mt-2"><%= data.error %></p>
+        <% } %>
+    </div>
+</div>

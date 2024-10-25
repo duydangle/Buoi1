@@ -1,5 +1,6 @@
 import express from "express";
-import userModel from '../model/usedmodel';  // Import model để xử lý với CSDL hoặc logic nghiệp vụ
+import userModel from '../Models/userModel'  // Import model để xử lý với CSDL hoặc logic nghiệp vụ
+import bcrypt from 'bcryptjs'
 
 // Controller để lấy tất cả người dùng
 const getAllUser = async (req, res) => {
@@ -35,7 +36,7 @@ const viewUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   let { id } = req.body; // Get the id from req.body, not req.params
   await userModel.deleteUserbyID(id);
-  res.redirect('/Alluser');
+  res.redirect('/getuser');
 };
 const editUser = async (req, res) => {
   let id = req.params.id;
