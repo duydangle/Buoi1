@@ -1,0 +1,23 @@
+<h1><%= data.title %></h1>
+<table>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Mã Nhóm</th>
+            <th>Tên Nhóm</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (data.rows && data.rows.length > 0) { %> 
+            <% data.rows.forEach((category, index) => { %> 
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= category.idnhom %></td> 
+                    <td><%= category.ten %></td> 
+                </tr>
+            <% }) %> 
+        <% } else { %> 
+            <tr><td colspan="8">No categorys found.</td></tr> 
+        <% } %>
+    </tbody>
+</table>

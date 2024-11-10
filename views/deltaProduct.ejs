@@ -1,0 +1,10 @@
+<h1><%= data.title %></h1>
+<div class="product-details">
+  <h2>Thông tin sản phẩm</h2>
+  <p><strong>Mã sản phẩm:</strong> <%= data.product.masp %></p>
+  <p><strong>Tên sản phẩm:</strong> <%= data.product.ten %></p>
+  <p><strong>Giá:</strong> <%= data.product.gia %> VND</p>
+  <p><strong>Hình ảnh:</strong> <img src="/images/product/<%= data.product.hinhanh %>" alt="<%= data.product.ten %>" width="200" /></p>
+  <p><strong>Mô tả:</strong> <%= data.product.mota %></p>
+  <p><strong>Nhóm sản phẩm:</strong> <%= data.product.idnhom %></p>
+</div>

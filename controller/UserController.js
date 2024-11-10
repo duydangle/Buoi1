@@ -5,12 +5,12 @@ import bcrypt from 'bcryptjs'
 // Controller để lấy tất cả người dùng
 const getAllUser = async (req, res) => {
   try {
-    let userList = await userModel.getAllUser(); // Gọi model để lấy danh sách người dùng
+    let productList = await userModel.getAllUser(); // Gọi model để lấy danh sách người dùng
     res.render('home', {
       data: {
         title: 'List User',
         page: 'listUser',
-        rows: userList // Truyền dữ liệu vào view
+        rows: productList // Truyền dữ liệu vào view
       }
     });
   } catch (error) {
@@ -54,7 +54,7 @@ const createUser = (req, res) => {
   res.render('home', {
     data: {
       title: 'Create New User',
-      page: 'createNewUser'     
+      page: 'createNewUser'
     }
   });
 }
@@ -67,26 +67,6 @@ const insertUser = async (req, res) => {
     res.redirect("/createNewUser"); 
   }
 };
-const loginUser = (req, res) => {
-  res.render('home', {
-    data: {
-      title: 'Create New User',
-      page: 'loginUser'     
-    }
-  });
-}
-const login = (req, res) => {
-  const { email, password } = req.body;
-
-  // Kiểm tra dữ liệu (tạm thời sử dụng một email và password cố định để kiểm tra)
-  if (email === 'admin@example.com' && password === 'password') {
-      res.send('Login thành công!');
-  } else {
-      res.status(401).send('Email hoặc mật khẩu không đúng.');
-  }
-};
-
-
 
 // Xuất các hàm controller để sử dụng trong routing
-export { getAllUser, createUser, viewUser, deleteUser, editUser, updateUser, insertUser,login,loginUser};
+export { getAllUser, createUser, viewUser, deleteUser, editUser, updateUser, insertUser};

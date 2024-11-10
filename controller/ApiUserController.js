@@ -166,5 +166,12 @@ const logoutUser = (req, res) => {
     });
 };
 
-
-export default { getAllUsers, detailUser, deleteUser, updateUser, insertUser, loginUser, logoutUser};
+const detailUserbyUsername = async (req, res) => {
+    let data = await userModel.getUserByUsername(req.params.username);
+    return res.status(200).json({
+      errCode: 1,
+      message: "Success",
+      deltauser: data
+    })
+  }
+export default { getAllUsers, detailUser, deleteUser, updateUser, insertUser, loginUser, logoutUser, detailUserbyUsername};
