@@ -33,11 +33,16 @@ const viewUser = async (req, res) => {
     res.status(500).send("Error retrieving user.");
   }
 };
+
+
 const deleteUser = async (req, res) => {
   let { id } = req.body; // Get the id from req.body, not req.params
-  await userModel.deleteUserbyID(id);
+  await userModel.deleteUserByID(id);
   res.redirect('/getuser');
 };
+
+
+
 const editUser = async (req, res) => {
   let id = req.params.id;
   let dataUser = await userModel.getUserById(id);

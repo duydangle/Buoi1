@@ -66,11 +66,13 @@ const authMiddleware = (req, res, next) => {
 };
 
 const adminMiddleware = (req, res, next) => {
+    // Kiểm tra xem user có phải là admin hay không
     if (req.session.user.role !== 'admin') {
         return res.status(403).send('Access denied'); // Trả về lỗi 403 nếu không phải là admin
     }
-    next();
+    next(); // Tiếp tục nếu là admin
 };
+
 
 const userMiddleware = async (req, res, next) => {
     const id = req.params.id || req.body.id;
@@ -199,45 +201,47 @@ const handleGetAccount = (req, res) => {
 
 
 const cl_authMiddleware = (req, res, next) => {
-    const token = req.cookies.jwt; // Get token from cookies
+    const token = req.cookies.jwt; // Lấy token từ cookie
 
     if (!token) {
-        return res.redirect('/login'); // Redirect to login if no token is provided
+        // In thông báo khi không có token
+        return res.send('Vui lòng đăng nhập để tiếp tục.'); 
     }
 
-    const decoded = verifyToken(token); // Decode the token
+    const decoded = verifyToken(token); // Giải mã token
 
     if (!decoded) {
-        return res.status(401).send('Unauthorized'); // If token is invalid, send 401 Unauthorized
+        // In thông báo khi token không hợp lệ
+        return res.send('Token không hợp lệ, vui lòng đăng nhập lại.');
     }
 
-    req.user = decoded; // Save decoded token information to the request object
-    next(); // Continue to the next middleware
+    req.user = decoded; // Lưu thông tin từ token vào req.user
+    next(); // Tiến hành tiếp tục xử lý các middleware hoặc route handler tiếp theo
 };
 const cl_userMiddleware = async (req, res, next) => {
-    const username = req.params.username; // Get the username from the URL parameter
-    const tokenUser = req.user.username; // Get the username from the decoded token
+    const username = req.params.username; // Lấy tên người dùng từ tham số URL
+    const tokenUser = req.user.username; // Lấy tên người dùng từ token đã giải mã
 
     try {
-        // If the user is an admin, allow access to all users
+        // Nếu người dùng là admin, cho phép truy cập tất cả người dùng
         if (req.user.role === 'admin') {
             return next();
         }
 
-        // Check if the token username matches the username in the URL
+        // Kiểm tra xem tên người dùng trong URL có khớp với tên người dùng trong token không
         if (username !== tokenUser) {
-            return res.status(403).send('Access denied. Bạn chỉ có thể thao tác trên tài khoản của mình.');
+            // In thông báo nếu không có quyền truy cập
+            return res.send('Bạn chỉ có thể thao tác trên tài khoản của mình.');
         }
 
-        // Proceed if the username matches
+        // Tiến hành tiếp tục nếu tên người dùng khớp
         next();
     } catch (error) {
-        console.error('Error in user access control:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Lỗi khi kiểm tra quyền truy cập:', error);
+        // In thông báo lỗi nếu có sự cố trong quá trình kiểm tra
+        return res.send('Đã xảy ra lỗi khi kiểm tra quyền truy cập.');
     }
 };
-
-
 
 
 

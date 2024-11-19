@@ -1,9 +1,9 @@
+import { Sequelize, DataTypes } from 'sequelize'; // Nhập cả Sequelize và DataTypes
 import mysql from 'mysql2'
-const pool = mysql.createPool({
+// Kết nối Sequelize
+const sequelize = new Sequelize('ltwnc_buoi3_node', 'root', '', {
     host: 'localhost',
-    user: 'root',
-    database: 'ltwnc_buoi3_node',
-    password: ''
-})
-const connection = pool.promise();
-export default connection
+    dialect: 'mysql', // Hoặc 'postgres', 'sqlite' nếu sử dụng loại cơ sở dữ liệu khác
+});
+
+export { sequelize, DataTypes };  // Xuất cả sequelize và DataTypes
